@@ -142,7 +142,7 @@ export default function PortfolioPreview({ data, theme: t }) {
       </div>
 
       <div style={{padding:'14px 36px',borderTop:`1px solid ${t.border}`,textAlign:'center',color:t.sub,fontSize:10,fontFamily:t.mono,opacity:0.5}}>
-        built with portfolio builder · by Md. Nabinur Islam Roni
+        2026 All Right Reserved. portfolio builder.
       </div>
     </div>
   )
