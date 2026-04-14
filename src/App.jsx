@@ -11,6 +11,7 @@ export default function App() {
   const pwa = usePWA()
   const [view, setView] = useState('split')
   const [darkMode, setDarkMode] = useState(true)
+  const [lang, setLang] = useState('en')        // ✅ নতুন
   const theme = getTheme(portfolio.data.themeId)
 
   const ui = {
@@ -32,8 +33,8 @@ export default function App() {
         installPrompt={pwa.installPrompt}
         install={pwa.install}
         lastSaved={portfolio.lastSaved}
-        darkMode={darkMode}
-        setDarkMode={setDarkMode}
+        darkMode={darkMode} setDarkMode={setDarkMode}
+        lang={lang} setLang={setLang}            // ✅ নতুন
       />
       <div style={{display:'flex', flex:1, height:'calc(100vh - 57px)', overflow:'hidden'}}>
         {view !== 'preview' && (
@@ -46,6 +47,7 @@ export default function App() {
               removeListItem={portfolio.removeListItem}
               themes={THEMES}
               darkMode={darkMode}
+              lang={lang}                        // ✅ নতুন
             />
           </div>
         )}
