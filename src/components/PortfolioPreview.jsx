@@ -63,9 +63,35 @@ export default function PortfolioPreview({ data, theme: t }) {
       {/* Body */}
       <div style={{padding:'32px 36px'}}>
 
+        {/* ✅ Stats — hero এর ঠিক নিচে সবার আগে */}
+        {data.stats?.some(s=>s.label) && (
+          <div style={{display:'flex',flexWrap:'wrap',gap:12,marginBottom:32}}>
+            {data.stats.filter(s=>s.label).map((s,i)=>(
+              <div key={i} style={{flex:'1 1 120px',background:t.card,border:`1px solid ${t.border}`,borderRadius:12,padding:'16px 20px',textAlign:'center'}}>
+                <div style={{fontSize:24,fontWeight:800,color:t.accent,fontFamily:t.mono,lineHeight:1}}>{s.value}</div>
+                <div style={{fontSize:11,color:t.sub,marginTop:6,letterSpacing:0.5,textTransform:'uppercase'}}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+        )}
+
         {skills.length>0 && (
           <Section title="Skills" accent={t.accent}>
             <div style={{display:'flex',flexWrap:'wrap',gap:8}}>{skills.map((s,i)=><Tag key={i} accent={t.accent}>{s}</Tag>)}</div>
+          </Section>
+        )}
+
+        {/* ✅ Services */}
+        {data.services?.some(s=>s.title) && (
+          <Section title="Services" accent={t.accent}>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))',gap:12}}>
+              {data.services.filter(s=>s.title).map((s,i)=>(
+                <div key={i} style={{background:t.card,border:`1px solid ${t.border}`,borderRadius:10,padding:'16px 18px'}}>
+                  <div style={{fontWeight:700,color:t.accent,fontSize:14,marginBottom:8}}>🎯 {s.title}</div>
+                  {s.desc && <p style={{margin:0,color:t.sub,fontSize:13,lineHeight:1.7}}>{s.desc}</p>}
+                </div>
+              ))}
+            </div>
           </Section>
         )}
 
@@ -133,9 +159,49 @@ export default function PortfolioPreview({ data, theme: t }) {
           </Section>
         )}
 
+        {/* ✅ Achievements */}
+        {data.achievements?.some(a=>a.title) && (
+          <Section title="Achievements" accent={t.accent}>
+            {data.achievements.filter(a=>a.title).map((a,i)=>(
+              <div key={i} style={{display:'flex',gap:14,marginBottom:18,paddingLeft:16,borderLeft:`2px solid ${t.accent}40`}}>
+                <div style={{flex:1}}>
+                  <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:4,marginBottom:4}}>
+                    <span style={{fontWeight:700,color:t.text,fontSize:14}}>🏆 {a.title}</span>
+                    {a.year && <span style={{color:t.accent,fontFamily:t.mono,fontSize:12}}>{a.year}</span>}
+                  </div>
+                  {a.desc && <p style={{margin:0,color:t.sub,fontSize:13,lineHeight:1.7}}>{a.desc}</p>}
+                </div>
+              </div>
+            ))}
+          </Section>
+        )}
+
         {langs.length>0 && (
           <Section title="Languages" accent={t.accent}>
             <div style={{display:'flex',flexWrap:'wrap',gap:8}}>{langs.map((l,i)=><Tag key={i} accent={t.accent}>{l}</Tag>)}</div>
+          </Section>
+        )}
+
+        {/* ✅ Testimonials — সবার শেষে */}
+        {data.testimonials?.some(t2=>t2.text) && (
+          <Section title="Testimonials" accent={t.accent}>
+            <div style={{display:'grid',gap:14}}>
+              {data.testimonials.filter(t2=>t2.text).map((t2,i)=>(
+                <div key={i} style={{background:t.card,border:`1px solid ${t.border}`,borderRadius:12,padding:'20px 22px',position:'relative'}}>
+                  <div style={{fontSize:32,color:t.accent,opacity:0.3,lineHeight:1,marginBottom:8}}>"</div>
+                  <p style={{margin:'0 0 14px',color:t.sub,fontSize:14,lineHeight:1.8,fontStyle:'italic'}}>{t2.text}</p>
+                  <div style={{display:'flex',alignItems:'center',gap:10}}>
+                    <div style={{width:32,height:32,borderRadius:'50%',background:t.accent+'22',border:`1px solid ${t.accent}44`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,color:t.accent,fontWeight:700}}>
+                      {t2.name?t2.name[0].toUpperCase():'?'}
+                    </div>
+                    <div>
+                      <div style={{fontWeight:700,color:t.text,fontSize:13}}>{t2.name}</div>
+                      {t2.role && <div style={{color:t.sub,fontSize:11,fontFamily:t.mono}}>{t2.role}</div>}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </Section>
         )}
 

@@ -3,6 +3,7 @@ export const translations = {
     // Tabs
     basic: 'Basic', links: 'Links', skills: 'Skills', exp: 'Experience',
     projects: 'Projects', edu: 'Education', certs: 'Certs', theme: 'Theme',
+    achieve: 'Achievements', testimonials: 'Testimonials', services: 'Services', stats: 'Stats',
     // Basic
     fullName: 'Full Name', titleRole: 'Title / Role', bioAbout: 'Bio / About',
     profilePhoto: 'Profile Photo', location: 'Location',
@@ -24,6 +25,22 @@ export const translations = {
     // Certs
     certNum: 'Cert', certName: 'Certificate Name', issuingBody: 'Issuing Body',
     year: 'Year', addCert: '+ Add Certification',
+    // Achievements
+    achieveNum: 'Achievement', achieveTitle: 'Achievement Title', achieveDesc: 'Description', achieveYear: 'Year',
+    addAchieve: '+ Add Achievement',
+    ph_achieveTitle: 'e.g. Best Developer Award', ph_achieveDesc: 'Brief description...', ph_achieveYear: '2024',
+    // Testimonials
+    testiNum: 'Testimonial', testiName: 'Person Name', testiRole: 'Their Role / Company', testiText: 'What they said',
+    addTesti: '+ Add Testimonial',
+    ph_testiName: 'e.g. John Doe', ph_testiRole: 'CTO at Tech Corp', ph_testiText: 'Working with them was amazing...',
+    // Services
+    serviceNum: 'Service', serviceTitle: 'Service Title', serviceDesc: 'Description',
+    addService: '+ Add Service',
+    ph_serviceTitle: 'e.g. Web Development', ph_serviceDesc: 'What you offer and how you help...',
+    // Stats
+    statNum: 'Stat', statLabel: 'Label', statValue: 'Value',
+    addStat: '+ Add Stat',
+    ph_statLabel: 'e.g. GitHub Stars', ph_statValue: 'e.g. 500+',
     // Theme
     themeDesc: 'Choose from 20 handcrafted themes.',
     // Placeholders
@@ -45,6 +62,7 @@ export const translations = {
   bn: {
     basic: 'বেসিক', links: 'লিংক', skills: 'দক্ষতা', exp: 'অভিজ্ঞতা',
     projects: 'প্রজেক্ট', edu: 'শিক্ষা', certs: 'সনদ', theme: 'থিম',
+    achieve: 'অর্জন', testimonials: 'রিভিউ', services: 'সেবা', stats: 'পরিসংখ্যান',
     fullName: 'পুরো নাম', titleRole: 'পদবি / ভূমিকা', bioAbout: 'পরিচিতি',
     profilePhoto: 'প্রোফাইল ছবি', location: 'অবস্থান',
     changePhoto: 'ছবি পরিবর্তন', uploadPhoto: 'ছবি আপলোড', removePhoto: 'সরিয়ে দাও',
@@ -59,6 +77,18 @@ export const translations = {
     degreeProgram: 'ডিগ্রি / প্রোগ্রাম', yearPeriod: 'বছর / সময়কাল', addEducation: '+ শিক্ষা যোগ করো',
     certNum: 'সনদ', certName: 'সনদের নাম', issuingBody: 'প্রদানকারী সংস্থা',
     year: 'বছর', addCert: '+ সনদ যোগ করো',
+    achieveNum: 'অর্জন', achieveTitle: 'অর্জনের শিরোনাম', achieveDesc: 'বিবরণ', achieveYear: 'বছর',
+    addAchieve: '+ অর্জন যোগ করো',
+    ph_achieveTitle: 'যেমন: সেরা ডেভেলপার পুরস্কার', ph_achieveDesc: 'সংক্ষিপ্ত বিবরণ...', ph_achieveYear: '২০২৪',
+    testiNum: 'রিভিউ', testiName: 'ব্যক্তির নাম', testiRole: 'পদ / প্রতিষ্ঠান', testiText: 'তারা কী বলেছেন',
+    addTesti: '+ রিভিউ যোগ করো',
+    ph_testiName: 'যেমন: করিম সাহেব', ph_testiRole: 'CTO, টেক কর্প', ph_testiText: 'তার সাথে কাজ করা অসাধারণ ছিল...',
+    serviceNum: 'সেবা', serviceTitle: 'সেবার নাম', serviceDesc: 'বিবরণ',
+    addService: '+ সেবা যোগ করো',
+    ph_serviceTitle: 'যেমন: ওয়েব ডেভেলপমেন্ট', ph_serviceDesc: 'আপনি কী অফার করেন...',
+    statNum: 'পরিসংখ্যান', statLabel: 'লেবেল', statValue: 'মান',
+    addStat: '+ পরিসংখ্যান যোগ করো',
+    ph_statLabel: 'যেমন: GitHub Stars', ph_statValue: 'যেমন: ৫০০+',
     themeDesc: '২০টি সুন্দর থিম থেকে বেছে নাও।',
     ph_name: 'যেমন: রাহিম চৌধুরী', ph_title: 'যেমন: ফুল স্ট্যাক ডেভেলপার',
     ph_bio: 'নিজের সম্পর্কে সংক্ষিপ্ত পরিচিতি...', ph_location: 'ঢাকা, বাংলাদেশ',
@@ -78,6 +108,7 @@ export const translations = {
   hi: {
     basic: 'बेसिक', links: 'लिंक', skills: 'कौशल', exp: 'अनुभव',
     projects: 'प्रोजेक्ट', edu: 'शिक्षा', certs: 'प्रमाण', theme: 'थीम',
+    achieve: 'उपलब्धियां', testimonials: 'समीक्षाएं', services: 'सेवाएं', stats: 'आंकड़े',
     fullName: 'पूरा नाम', titleRole: 'पद / भूमिका', bioAbout: 'परिचय',
     profilePhoto: 'प्रोफ़ाइल फ़ोटो', location: 'स्थान',
     changePhoto: 'फ़ोटो बदलें', uploadPhoto: 'फ़ोटो अपलोड करें', removePhoto: 'हटाएं',
@@ -92,6 +123,18 @@ export const translations = {
     degreeProgram: 'डिग्री / कार्यक्रम', yearPeriod: 'वर्ष / अवधि', addEducation: '+ शिक्षा जोड़ें',
     certNum: 'प्रमाण', certName: 'प्रमाण पत्र का नाम', issuingBody: 'जारीकर्ता संस्था',
     year: 'वर्ष', addCert: '+ प्रमाण पत्र जोड़ें',
+    achieveNum: 'उपलब्धि', achieveTitle: 'उपलब्धि का शीर्षक', achieveDesc: 'विवरण', achieveYear: 'वर्ष',
+    addAchieve: '+ उपलब्धि जोड़ें',
+    ph_achieveTitle: 'जैसे: सर्वश्रेष्ठ डेवलपर पुरस्कार', ph_achieveDesc: 'संक्षिप्त विवरण...', ph_achieveYear: '2024',
+    testiNum: 'समीक्षा', testiName: 'व्यक्ति का नाम', testiRole: 'पद / कंपनी', testiText: 'उन्होंने क्या कहा',
+    addTesti: '+ समीक्षा जोड़ें',
+    ph_testiName: 'जैसे: राहुल वर्मा', ph_testiRole: 'CTO, टेक कॉर्प', ph_testiText: 'उनके साथ काम करना शानदार था...',
+    serviceNum: 'सेवा', serviceTitle: 'सेवा का नाम', serviceDesc: 'विवरण',
+    addService: '+ सेवा जोड़ें',
+    ph_serviceTitle: 'जैसे: वेब डेवलपमेंट', ph_serviceDesc: 'आप क्या ऑफर करते हैं...',
+    statNum: 'आंकड़ा', statLabel: 'लेबल', statValue: 'मान',
+    addStat: '+ आंकड़ा जोड़ें',
+    ph_statLabel: 'जैसे: GitHub Stars', ph_statValue: 'जैसे: 500+',
     themeDesc: '20 खूबसूरत थीम में से चुनें।',
     ph_name: 'जैसे: राहुल शर्मा', ph_title: 'जैसे: फुल स्टैक डेवलपर',
     ph_bio: 'अपने बारे में संक्षिप्त परिचय...', ph_location: 'दिल्ली, भारत',

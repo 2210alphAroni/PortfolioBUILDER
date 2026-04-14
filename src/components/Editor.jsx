@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { translations } from '../data/i18n'  // ✅ নতুন
+import { translations } from '../data/i18n'
 
 const IG = ({ label, children, LS }) => (
   <div style={{marginBottom:14}}>
@@ -9,14 +9,18 @@ const IG = ({ label, children, LS }) => (
 )
 
 const TABS = [
-  {id:'basic',    icon:'👤', key:'basic'},
-  {id:'links',    icon:'🔗', key:'links'},
-  {id:'skills',   icon:'🛠',  key:'skills'},
-  {id:'exp',      icon:'💼', key:'exp'},
-  {id:'projects', icon:'🚀', key:'projects'},
-  {id:'edu',      icon:'🎓', key:'edu'},
-  {id:'certs',    icon:'📜', key:'certs'},
-  {id:'theme',    icon:'🎨', key:'theme'},
+  {id:'basic',        icon:'👤', key:'basic'},
+  {id:'links',        icon:'🔗', key:'links'},
+  {id:'skills',       icon:'🛠',  key:'skills'},
+  {id:'exp',          icon:'💼', key:'exp'},
+  {id:'projects',     icon:'🚀', key:'projects'},
+  {id:'edu',          icon:'🎓', key:'edu'},
+  {id:'certs',        icon:'📜', key:'certs'},
+  {id:'achieve',      icon:'🏆', key:'achieve'},      // ✅ নতুন
+  {id:'testimonials', icon:'💬', key:'testimonials'}, // ✅ নতুন
+  {id:'services',     icon:'🎯', key:'services'},     // ✅ নতুন
+  {id:'stats',        icon:'📊', key:'stats'},        // ✅ নতুন
+  {id:'theme',        icon:'🎨', key:'theme'},
 ]
 
 const SimpleInput = ({ value, onChange, placeholder, IS }) => (
@@ -27,11 +31,11 @@ const SimpleTextarea = ({ value, onChange, placeholder, TS }) => (
   <textarea style={TS} value={value} onChange={onChange} placeholder={placeholder} />
 )
 
-export default function Editor({ data, set, setListItem, addListItem, removeListItem, themes, darkMode, lang }) {  // ✅ lang যোগ
+export default function Editor({ data, set, setListItem, addListItem, removeListItem, themes, darkMode, lang }) {
   const [tab, setTab] = useState('basic')
   const fileRef = useRef()
   const dm = darkMode
-  const t = translations[lang] || translations.en  // ✅ নতুন
+  const t = translations[lang] || translations.en
 
   const IS = { width:'100%', background:dm?'#0f0f0f':'#ffffff', border:`1px solid ${dm?'#252525':'#d0d0d0'}`, borderRadius:8, padding:'10px 13px', color:dm?'#f0ece4':'#111111', fontSize:13, fontFamily:'inherit', outline:'none', boxSizing:'border-box', transition:'border-color 0.2s' }
   const TS = { ...IS, resize:'vertical', minHeight:88, lineHeight:1.7 }
@@ -44,13 +48,17 @@ export default function Editor({ data, set, setListItem, addListItem, removeList
     const r = new FileReader(); r.onload = ev => set('avatar', ev.target.result); r.readAsDataURL(f)
   }
 
+  const RemoveBtn = ({ onClick }) => (
+    <button style={{background:'none', border:'none', color:dm?'#555':'#999', cursor:'pointer', fontSize:18}} onClick={onClick}>×</button>
+  )
+
   return (
     <div style={{display:'flex', flexDirection:'column', height:'100%', overflow:'hidden'}}>
       {/* Tabs */}
       <div style={{padding:'10px 12px', borderBottom:`1px solid ${dm?'#161616':'#e8e8e8'}`, display:'flex', gap:2, flexWrap:'wrap', background:dm?'#050505':'#fafafa', position:'sticky', top:0, zIndex:5}}>
         {TABS.map(item=>(
           <button key={item.id} onClick={()=>setTab(item.id)} style={{padding:'7px 11px', fontSize:11, fontWeight:600, letterSpacing:0.5, textTransform:'uppercase', border:'none', cursor:'pointer', borderRadius:6, transition:'all 0.15s', background:tab===item.id?'#e8d5b7':'transparent', color:tab===item.id?'#0a0a0a':dm?'#555':'#888'}}>
-            <span style={{marginRight:4}}>{item.icon}</span>{t[item.key]}  {/* ✅ */}
+            <span style={{marginRight:4}}>{item.icon}</span>{t[item.key]}
           </button>
         ))}
       </div>
@@ -104,7 +112,7 @@ export default function Editor({ data, set, setListItem, addListItem, removeList
             <div key={i} style={CS}>
               <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:12}}>
                 <span style={{fontSize:11, color:dm?'#555':'#999', fontWeight:700, letterSpacing:1, textTransform:'uppercase'}}>{t.experienceNum} #{i+1}</span>
-                {data.experience.length>1 && <button style={{background:'none', border:'none', color:dm?'#555':'#999', cursor:'pointer', fontSize:18}} onClick={()=>removeListItem('experience',i)}>×</button>}
+                {data.experience.length>1 && <RemoveBtn onClick={()=>removeListItem('experience',i)} />}
               </div>
               <IG label={t.jobTitle} LS={LS}><SimpleInput IS={IS} value={exp.role} onChange={e=>setListItem('experience',i,'role',e.target.value)} placeholder={t.ph_role} /></IG>
               <IG label={t.company} LS={LS}><SimpleInput IS={IS} value={exp.company} onChange={e=>setListItem('experience',i,'company',e.target.value)} placeholder={t.ph_company} /></IG>
@@ -120,7 +128,7 @@ export default function Editor({ data, set, setListItem, addListItem, removeList
             <div key={i} style={CS}>
               <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:12}}>
                 <span style={{fontSize:11, color:dm?'#555':'#999', fontWeight:700, letterSpacing:1, textTransform:'uppercase'}}>{t.projectNum} #{i+1}</span>
-                {data.projects.length>1 && <button style={{background:'none', border:'none', color:dm?'#555':'#999', cursor:'pointer', fontSize:18}} onClick={()=>removeListItem('projects',i)}>×</button>}
+                {data.projects.length>1 && <RemoveBtn onClick={()=>removeListItem('projects',i)} />}
               </div>
               <IG label={t.projectName} LS={LS}><SimpleInput IS={IS} value={proj.name} onChange={e=>setListItem('projects',i,'name',e.target.value)} placeholder={t.ph_projName} /></IG>
               <IG label={t.repoLink} LS={LS}><SimpleInput IS={IS} value={proj.link} onChange={e=>setListItem('projects',i,'link',e.target.value)} placeholder={t.ph_projLink} /></IG>
@@ -136,7 +144,7 @@ export default function Editor({ data, set, setListItem, addListItem, removeList
             <div key={i} style={CS}>
               <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:12}}>
                 <span style={{fontSize:11, color:dm?'#555':'#999', fontWeight:700, letterSpacing:1, textTransform:'uppercase'}}>{t.educationNum} #{i+1}</span>
-                {data.education.length>1 && <button style={{background:'none', border:'none', color:dm?'#555':'#999', cursor:'pointer', fontSize:18}} onClick={()=>removeListItem('education',i)}>×</button>}
+                {data.education.length>1 && <RemoveBtn onClick={()=>removeListItem('education',i)} />}
               </div>
               <IG label={t.schoolUniversity} LS={LS}><SimpleInput IS={IS} value={edu.school} onChange={e=>setListItem('education',i,'school',e.target.value)} placeholder={t.ph_school} /></IG>
               <IG label={t.degreeProgram} LS={LS}><SimpleInput IS={IS} value={edu.degree} onChange={e=>setListItem('education',i,'degree',e.target.value)} placeholder={t.ph_degree} /></IG>
@@ -151,7 +159,7 @@ export default function Editor({ data, set, setListItem, addListItem, removeList
             <div key={i} style={CS}>
               <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:12}}>
                 <span style={{fontSize:11, color:dm?'#555':'#999', fontWeight:700, letterSpacing:1, textTransform:'uppercase'}}>{t.certNum} #{i+1}</span>
-                {data.certifications.length>1 && <button style={{background:'none', border:'none', color:dm?'#555':'#999', cursor:'pointer', fontSize:18}} onClick={()=>removeListItem('certifications',i)}>×</button>}
+                {data.certifications.length>1 && <RemoveBtn onClick={()=>removeListItem('certifications',i)} />}
               </div>
               <IG label={t.certName} LS={LS}><SimpleInput IS={IS} value={cert.name} onChange={e=>setListItem('certifications',i,'name',e.target.value)} placeholder={t.ph_certName} /></IG>
               <IG label={t.issuingBody} LS={LS}><SimpleInput IS={IS} value={cert.issuer} onChange={e=>setListItem('certifications',i,'issuer',e.target.value)} placeholder={t.ph_issuer} /></IG>
@@ -159,6 +167,68 @@ export default function Editor({ data, set, setListItem, addListItem, removeList
             </div>
           ))}
           <button style={AS} onClick={()=>addListItem('certifications',{name:'',issuer:'',year:''})}>{t.addCert}</button>
+        </>}
+
+        {/* ✅ ACHIEVEMENTS */}
+        {tab==='achieve' && <>
+          {data.achievements.map((a,i)=>(
+            <div key={i} style={CS}>
+              <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:12}}>
+                <span style={{fontSize:11, color:dm?'#555':'#999', fontWeight:700, letterSpacing:1, textTransform:'uppercase'}}>{t.achieveNum} #{i+1}</span>
+                {data.achievements.length>1 && <RemoveBtn onClick={()=>removeListItem('achievements',i)} />}
+              </div>
+              <IG label={t.achieveTitle} LS={LS}><SimpleInput IS={IS} value={a.title} onChange={e=>setListItem('achievements',i,'title',e.target.value)} placeholder={t.ph_achieveTitle} /></IG>
+              <IG label={t.achieveDesc} LS={LS}><SimpleTextarea TS={TS} value={a.desc} onChange={e=>setListItem('achievements',i,'desc',e.target.value)} placeholder={t.ph_achieveDesc} /></IG>
+              <IG label={t.achieveYear} LS={LS}><SimpleInput IS={IS} value={a.year} onChange={e=>setListItem('achievements',i,'year',e.target.value)} placeholder={t.ph_achieveYear} /></IG>
+            </div>
+          ))}
+          <button style={AS} onClick={()=>addListItem('achievements',{title:'',desc:'',year:''})}>{t.addAchieve}</button>
+        </>}
+
+        {/* ✅ TESTIMONIALS */}
+        {tab==='testimonials' && <>
+          {data.testimonials.map((t2,i)=>(
+            <div key={i} style={CS}>
+              <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:12}}>
+                <span style={{fontSize:11, color:dm?'#555':'#999', fontWeight:700, letterSpacing:1, textTransform:'uppercase'}}>{t.testiNum} #{i+1}</span>
+                {data.testimonials.length>1 && <RemoveBtn onClick={()=>removeListItem('testimonials',i)} />}
+              </div>
+              <IG label={t.testiName} LS={LS}><SimpleInput IS={IS} value={t2.name} onChange={e=>setListItem('testimonials',i,'name',e.target.value)} placeholder={t.ph_testiName} /></IG>
+              <IG label={t.testiRole} LS={LS}><SimpleInput IS={IS} value={t2.role} onChange={e=>setListItem('testimonials',i,'role',e.target.value)} placeholder={t.ph_testiRole} /></IG>
+              <IG label={t.testiText} LS={LS}><SimpleTextarea TS={TS} value={t2.text} onChange={e=>setListItem('testimonials',i,'text',e.target.value)} placeholder={t.ph_testiText} /></IG>
+            </div>
+          ))}
+          <button style={AS} onClick={()=>addListItem('testimonials',{name:'',role:'',text:''})}>{t.addTesti}</button>
+        </>}
+
+        {/* ✅ SERVICES */}
+        {tab==='services' && <>
+          {data.services.map((s,i)=>(
+            <div key={i} style={CS}>
+              <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:12}}>
+                <span style={{fontSize:11, color:dm?'#555':'#999', fontWeight:700, letterSpacing:1, textTransform:'uppercase'}}>{t.serviceNum} #{i+1}</span>
+                {data.services.length>1 && <RemoveBtn onClick={()=>removeListItem('services',i)} />}
+              </div>
+              <IG label={t.serviceTitle} LS={LS}><SimpleInput IS={IS} value={s.title} onChange={e=>setListItem('services',i,'title',e.target.value)} placeholder={t.ph_serviceTitle} /></IG>
+              <IG label={t.serviceDesc} LS={LS}><SimpleTextarea TS={TS} value={s.desc} onChange={e=>setListItem('services',i,'desc',e.target.value)} placeholder={t.ph_serviceDesc} /></IG>
+            </div>
+          ))}
+          <button style={AS} onClick={()=>addListItem('services',{title:'',desc:''})}>{t.addService}</button>
+        </>}
+
+        {/* ✅ STATS */}
+        {tab==='stats' && <>
+          {data.stats.map((s,i)=>(
+            <div key={i} style={CS}>
+              <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:12}}>
+                <span style={{fontSize:11, color:dm?'#555':'#999', fontWeight:700, letterSpacing:1, textTransform:'uppercase'}}>{t.statNum} #{i+1}</span>
+                {data.stats.length>1 && <RemoveBtn onClick={()=>removeListItem('stats',i)} />}
+              </div>
+              <IG label={t.statLabel} LS={LS}><SimpleInput IS={IS} value={s.label} onChange={e=>setListItem('stats',i,'label',e.target.value)} placeholder={t.ph_statLabel} /></IG>
+              <IG label={t.statValue} LS={LS}><SimpleInput IS={IS} value={s.value} onChange={e=>setListItem('stats',i,'value',e.target.value)} placeholder={t.ph_statValue} /></IG>
+            </div>
+          ))}
+          <button style={AS} onClick={()=>addListItem('stats',{label:'',value:''})}>{t.addStat}</button>
         </>}
 
         {tab==='theme' && <>
