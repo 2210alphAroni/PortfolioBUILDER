@@ -54,11 +54,30 @@ export function usePortfolio() {
   }, [data])
 
   const importData = useCallback((file) => new Promise((res, rej) => {
-    const r = new FileReader()
-    r.onload = ev => { try { setData({...DEFAULT_DATA,...JSON.parse(ev.target.result)}); res(true) } catch { rej(new Error('Invalid JSON')) } }
-    r.onerror = () => rej(new Error('Read error'))
-    r.readAsText(file)
-  }), [])
+  const r = new FileReader()
+  r.onload = ev => {
+    try {
+      const parsed = JSON.parse(ev.target.result)
+      // ✅ FIX: DEFAULT_DATA দিয়ে deep merge করো যাতে নতুন fields miss না হয়
+      const merged = {
+        ...DEFAULT_DATA,
+        ...parsed,
+        experience:     parsed.experience?.length     ? parsed.experience     : DEFAULT_DATA.experience,
+        projects:       parsed.projects?.length       ? parsed.projects       : DEFAULT_DATA.projects,
+        education:      parsed.education?.length      ? parsed.education      : DEFAULT_DATA.education,
+        certifications: parsed.certifications?.length ? parsed.certifications : DEFAULT_DATA.certifications,
+        achievements:   parsed.achievements?.length   ? parsed.achievements   : DEFAULT_DATA.achievements,
+        testimonials:   parsed.testimonials?.length   ? parsed.testimonials   : DEFAULT_DATA.testimonials,
+        services:       parsed.services?.length       ? parsed.services       : DEFAULT_DATA.services,
+        stats:          parsed.stats?.length          ? parsed.stats          : DEFAULT_DATA.stats,
+      }
+      setData(merged)
+      res(true)
+    } catch { rej(new Error('Invalid JSON')) }
+  }
+  r.onerror = () => rej(new Error('Read error'))
+  r.readAsText(file)
+}), [])
 
   return { data, set, setListItem, addListItem, removeListItem, reset, exportData, importData, downloadHTML, lastSaved }
 }
